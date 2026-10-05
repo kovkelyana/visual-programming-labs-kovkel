@@ -1,0 +1,74 @@
+[
+    {
+        "id": "fe41974ed978727a",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "044c11ca73073f96",
+        "type": "inject",
+        "z": "fe41974ed978727a",
+        "name": "Inject object",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{     \"name\": \"Ковкель\",     \"group\": \"УИР-241\",     \"age\": 20 }",
+        "payloadType": "json",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "2b177508d1dcca38"
+            ]
+        ]
+    },
+    {
+        "id": "2b177508d1dcca38",
+        "type": "template",
+        "z": "fe41974ed978727a",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"student\": \"{{payload.name}}\",\n    \"group\": \"{{payload.group}}\",\n    \"age\": {{payload.age}},\n    \"message\": \"Студент {{payload.name}} из группы {{payload.group}}, возраст {{payload.age}}\"\n}",
+        "output": "json",
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "4fb1c2b0c23370cf"
+            ]
+        ]
+    },
+    {
+        "id": "4fb1c2b0c23370cf",
+        "type": "debug",
+        "z": "fe41974ed978727a",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 240,
+        "wires": []
+    }
+]

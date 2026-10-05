@@ -1,0 +1,97 @@
+[
+    {
+        "id": "0e9529760d2e6b5d",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aaf7fb55490ce65a",
+        "type": "inject",
+        "z": "0e9529760d2e6b5d",
+        "name": "Inject change",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "тест change",
+        "payloadType": "str",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "0da0fb4403022622"
+            ]
+        ]
+    },
+    {
+        "id": "0da0fb4403022622",
+        "type": "change",
+        "z": "0e9529760d2e6b5d",
+        "name": "Change: topic, timestamp, payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "изменённый payload",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "lab2/Ковкель/change",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [
+                "96020e452738f227"
+            ]
+        ]
+    },
+    {
+        "id": "96020e452738f227",
+        "type": "debug",
+        "z": "0e9529760d2e6b5d",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 240,
+        "wires": []
+    }
+]
