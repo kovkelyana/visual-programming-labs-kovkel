@@ -1,0 +1,142 @@
+[
+    {
+        "id": "76e28ca7e9cd93d8",
+        "type": "tab",
+        "label": "Flow 11",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "360b17bf211d9889",
+        "type": "inject",
+        "z": "76e28ca7e9cd93d8",
+        "name": "Write file",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "мяу",
+        "payloadType": "str",
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "78fceadd4ad291aa"
+            ]
+        ]
+    },
+    {
+        "id": "78fceadd4ad291aa",
+        "type": "function",
+        "z": "76e28ca7e9cd93d8",
+        "name": "function 7",
+        "func": "// Формируем строку с временем и текстом\nconst now = new Date().toISOString();\nconst text = msg.payload;\n\nmsg.payload = `[${now}] ${text}\\n`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "201fe66ddff41a6d"
+            ]
+        ]
+    },
+    {
+        "id": "201fe66ddff41a6d",
+        "type": "file",
+        "z": "76e28ca7e9cd93d8",
+        "name": "",
+        "filename": "/data/lab2-test.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 630,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5330cf2d8f05eba",
+        "type": "inject",
+        "z": "76e28ca7e9cd93d8",
+        "name": "Read file",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "макпМФцунгпакн",
+        "payloadType": "str",
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "226dab7d933945a0"
+            ]
+        ]
+    },
+    {
+        "id": "226dab7d933945a0",
+        "type": "file in",
+        "z": "76e28ca7e9cd93d8",
+        "name": "",
+        "filename": "/data/lab2-test.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "43ae4a6c5a557c7e"
+            ]
+        ]
+    },
+    {
+        "id": "43ae4a6c5a557c7e",
+        "type": "debug",
+        "z": "76e28ca7e9cd93d8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 520,
+        "wires": []
+    }
+]

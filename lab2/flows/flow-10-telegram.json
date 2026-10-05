@@ -1,0 +1,175 @@
+[
+    {
+        "id": "2c2ca2b9573d2fb5",
+        "type": "tab",
+        "label": "Flow 10",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "efab4258dcbeeab0",
+        "type": "telegram command",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "",
+        "command": "/start",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "4ed7f1c7e6bf3d72",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 70,
+        "y": 340,
+        "wires": [
+            [
+                "8390b6c07620f384",
+                "e160a6f1e36c8ddd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9d6daeaa3c1f8933",
+        "type": "telegram sender",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "Reply start",
+        "bot": "4ed7f1c7e6bf3d72",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8390b6c07620f384",
+        "type": "template",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "Start message",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"chatId\": \"{{payload.chatId}}\",\n    \"type\": \"message\",\n    \"content\": \"Привет! Я бот лабораторной №2.\\n\\nДоступные команды:\\n/start — это сообщение\\nНапиши любое сообщение — отвечу эхом.\"\n}",
+        "output": "json",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "9d6daeaa3c1f8933"
+            ]
+        ]
+    },
+    {
+        "id": "e160a6f1e36c8ddd",
+        "type": "debug",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 180,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "60e210efa6a61aa5",
+        "type": "telegram receiver",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "Echo receiver",
+        "bot": "4ed7f1c7e6bf3d72",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "hasinput": false,
+        "inputs": 0,
+        "handleallupdates": false,
+        "handleprocessupdates": false,
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "b73b6b15c42ccb18"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b73b6b15c42ccb18",
+        "type": "function",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "function 6",
+        "func": "// Echo: возвращаем тот же текст, что прислал пользователь\n// Извлекаем данные из объекта, который прислал Telegram receiver\n\nconst chatId = msg.payload.chatId;\nconst text = msg.payload.content || \"(пустое сообщение)\";\n\nmsg.payload = {\n    chatId: chatId,\n    type: \"message\",\n    content: \"Эхо: \" + text\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 560,
+        "wires": [
+            [
+                "cf395ff0fbb68494"
+            ]
+        ]
+    },
+    {
+        "id": "cf395ff0fbb68494",
+        "type": "telegram sender",
+        "z": "2c2ca2b9573d2fb5",
+        "name": "Echo reply ",
+        "bot": "4ed7f1c7e6bf3d72",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ed7f1c7e6bf3d72",
+        "type": "telegram bot",
+        "botname": "tvl_lab2_kovkel2026_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "6d3583dcb002cc1b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-telegrambot": "19.0.3"
+        }
+    }
+]
