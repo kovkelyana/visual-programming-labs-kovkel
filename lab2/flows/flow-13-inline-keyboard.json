@@ -1,0 +1,154 @@
+[
+    {
+        "id": "fadf78e3e179cc54",
+        "type": "tab",
+        "label": "Flow 13",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "680d72a551e1808c",
+        "type": "telegram command",
+        "z": "fadf78e3e179cc54",
+        "name": "",
+        "command": "/music",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "4ed7f1c7e6bf3d72",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 50,
+        "y": 280,
+        "wires": [
+            [
+                "8c60976f33f7497c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8c60976f33f7497c",
+        "type": "function",
+        "z": "fadf78e3e179cc54",
+        "name": "function 10",
+        "func": "// Формируем меню с inline-кнопками\nconst chatId = msg.payload.chatId;\n\nmsg.payload = {\n    chatId: chatId,\n    type: \"message\",\n    content: \"🎵 Какой у тебя любимый жанр музыки?\\n\\nВыбери один из вариантов ниже:\",\n    options: {\n        reply_markup: {\n            inline_keyboard: [\n                [\n                    { text: \"🎸 Рок\", callback_data: \"genre_rock\" },\n                    { text: \"🎤 Поп\", callback_data: \"genre_pop\" }\n                ],\n                [\n                    { text: \"🎻 Классика\", callback_data: \"genre_classic\" },\n                    { text: \"🎧 Электроника\", callback_data: \"genre_electro\" }\n                ]\n            ]\n        }\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "f2a8f09a15564eb1"
+            ]
+        ]
+    },
+    {
+        "id": "f2a8f09a15564eb1",
+        "type": "telegram sender",
+        "z": "fadf78e3e179cc54",
+        "name": "Menu sender",
+        "bot": "4ed7f1c7e6bf3d72",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79fa1c1d53a00b8d",
+        "type": "telegram event",
+        "z": "fadf78e3e179cc54",
+        "name": "Callback events",
+        "bot": "4ed7f1c7e6bf3d72",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 100,
+        "y": 380,
+        "wires": [
+            [
+                "b7c9b0bd62df26bc"
+            ]
+        ]
+    },
+    {
+        "id": "b7c9b0bd62df26bc",
+        "type": "function",
+        "z": "fadf78e3e179cc54",
+        "name": "function 11",
+        "func": "// Получаем данные из callback_query\nconst chatId = msg.payload.chatId;\nconst callbackData = msg.payload.content;  // то, что лежит в callback_data кнопки\n\n// Словарь жанров\nconst genres = {\n    \"genre_rock\": \"🎸 Рок\",\n    \"genre_pop\": \"🎤 Поп\",\n    \"genre_classic\": \"🎻 Классика\",\n    \"genre_electro\": \"🎧 Электроника\"\n};\n\n// === Сценарий 1: пользователь нажал кнопку жанра ===\nif (genres[callbackData]) {\n    const genreName = genres[callbackData];\n    msg.payload = {\n        chatId: chatId,\n        type: \"message\",\n        content: `Твой выбор: ${genreName}\\n\\nОтличный вкус! 🎵`,\n        options: {\n            reply_markup: {\n                inline_keyboard: [\n                    [\n                        { text: \"↩ Вернуться в меню\", callback_data: \"back_to_menu\" }\n                    ]\n                ]\n            }\n        }\n    };\n    return msg;\n}\n\n// === Сценарий 2: пользователь нажал \"Вернуться в меню\" ===\nif (callbackData === \"back_to_menu\") {\n    msg.payload = {\n        chatId: chatId,\n        type: \"message\",\n        content: \"🎵 Какой у тебя любимый жанр музыки?\\n\\nВыбери один из вариантов ниже:\",\n        options: {\n            reply_markup: {\n                inline_keyboard: [\n                    [\n                        { text: \"🎸 Рок\", callback_data: \"genre_rock\" },\n                        { text: \"🎤 Поп\", callback_data: \"genre_pop\" }\n                    ],\n                    [\n                        { text: \"🎻 Классика\", callback_data: \"genre_classic\" },\n                        { text: \"🎧 Электроника\", callback_data: \"genre_electro\" }\n                    ]\n                ]\n            }\n        }\n    };\n    return msg;\n}\n\n// === Сценарий 3: неизвестная callback-команда ===\nmsg.payload = {\n    chatId: chatId,\n    type: \"message\",\n    content: \"Не понял команду. Попробуй /music заново.\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "ae8a7543b0a5d082"
+            ]
+        ]
+    },
+    {
+        "id": "ae8a7543b0a5d082",
+        "type": "telegram sender",
+        "z": "fadf78e3e179cc54",
+        "name": "Callback reply",
+        "bot": "4ed7f1c7e6bf3d72",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ed7f1c7e6bf3d72",
+        "type": "telegram bot",
+        "botname": "tvl_lab2_kovkel2026_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "d6653d6d15cfb204",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-telegrambot": "19.0.3"
+        }
+    }
+]
