@@ -73,52 +73,52 @@ Linux 6.18.40.1-microsoft-standard-WSL2 x64 LE
 Все скриншоты находятся в папке `lab2/screenshots/`.
 
 ### 2.1. Inject → Debug
-![Inject Debug](screenshots/01-inject-debug.png)
+![Inject Debug](/lab2/screenshots/01-inject-debug.png)
 
 ### 2.2. Function
-![Function](screenshots/02-function.png)
+![Function](/lab2/screenshots/02-function.png)
 
 ### 2.3. Switch
-![Switch](screenshots/03-switch.png)
+![Switch](/lab2/screenshots/03-switch.png)
 
 ### 2.4. Change
-![Change](screenshots/04-change.png)
+![Change](/lab2/screenshots/04-change.png)
 
 ### 2.5. Template
-![Template](screenshots/05-template.png)
+![Template](/lab2/screenshots/05-template.png)
 
 ### 2.6. HTTP Request
-![HTTP Request](screenshots/06-http-request.png)
+![HTTP Request](/lab2/screenshots/06-http-request.png)
 
 ### 2.7. MQTT
-![MQTT](screenshots/07-mqtt.png)
+![MQTT](/lab2/screenshots/07-mqtt.png)
 
 ### 2.8. GET-эндпоинты
-![Endpoint text](screenshots/08a-endpoint-text.png)
-![Endpoint info](screenshots/08b-endpoint-info.png)
-![Endpoint items OK](screenshots/08c-endpoint-items-ok.png)
-![Endpoint items 400](screenshots/08d-endpoint-items-400.png)
-![Endpoint items 404](screenshots/08e-endpoint-items-404.png)
+![Endpoint text](/lab2/screenshots/08a-endpoint-text.png)
+![Endpoint info](/lab2/screenshots/08b-endpoint-info.png)
+![Endpoint items OK](/lab2/screenshots/08c-endpoint-items-ok.png)
+![Endpoint items 400](/lab2/screenshots/08d-endpoint-items-400.png)
+![Endpoint items 404](/lab2/screenshots/08e-endpoint-items-404.png)
 
 ### 2.9. Dashboard
-![Dashboard](screenshots/09-dashboard.png)
+![Dashboard](/lab2/screenshots/09-dashboard.png)
 
 ### 2.10. Telegram-бот
-![Telegram start](screenshots/10a-telegram-start.png)
-![Telegram echo](screenshots/10b-telegram-echo.png)
+![Telegram start](/lab2/screenshots/10a-telegram-start.png)
+![Telegram echo](/lab2/screenshots/10b-telegram-echo.png)
 
 ### 2.11. Файлы (с доказательством сохранения между перезапусками)
-![Files before restart](screenshots/11a-before-restart.png)
-![Restart](screenshots/11b-restart.png)
-![Files after restart](screenshots/11c-after-restart.png)
+![Files before restart](/lab2/screenshots/11a-before-restart.png)
+![Restart](/lab2/screenshots/11b-restart.png)
+![Files after restart](/lab2/screenshots/11c-after-restart.png)
 
 ### 2.12. Контекст (счётчик)
-![Context](screenshots/12a-context.png)
-![Context 2](screenshots/12b-context.png)
+![Context](/lab2/screenshots/12a-context.png)
+![Context 2](/lab2/screenshots/12b-context.png)
 
 ### Ачивка 11. Telegram inline keyboard
-![Achievement 11](screenshots/13-achievement-inline-keyboard.png)
+![Achievement 11](/lab2/screenshots/13-achievement-inline-keyboard.png)
 
 ## 6. Выводы
 
-В ходе лабораторной работы я освоила Node-RED как low-code инструмент. Разобралась как работают потоки. Научился создавать собственные REST-эндпоинты, публиковать и подписываться на MQTT-топики, работать с Telegram-ботом, в том числе с inline-клавиатурой и обработкой `callback_query`. Отдельно разобралась с dashboard для визуализации данных. Работа с файлами и volume показала, как данные сохраняются между перезапусками контейнера. Понравилось больше всего создание бота - реально можно углубиться и много чего придумать, создать свой боткак бы особо без написания кода
+В ходе лабораторной работы я освоила Node-RED как low-code инструмент. Разобралась как работают потоки. Научилась создавать собственные REST-эндпоинты, публиковать и подписываться на MQTT-топики, работать с Telegram-ботом, в том числе с inline-клавиатурой и обработкой `callback_query`. Отдельно разобралась с dashboard для визуализации данных. Работа с файлами и volume показала, как данные сохраняются между перезапусками контейнера. Понравилось больше всего создание бота - реально можно углубиться и много чего придумать, создать свой боткак бы особо без написания кода
