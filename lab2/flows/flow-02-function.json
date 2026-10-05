@@ -1,0 +1,75 @@
+[
+    {
+        "id": "06bffebe6a51ef33",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d665ea2e112d7a70",
+        "type": "inject",
+        "z": "06bffebe6a51ef33",
+        "name": "Inject number",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "7",
+        "payloadType": "num",
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "acf9c73ad9664cfd"
+            ]
+        ]
+    },
+    {
+        "id": "acf9c73ad9664cfd",
+        "type": "function",
+        "z": "06bffebe6a51ef33",
+        "name": "function 1",
+        "func": "// === Настройки ===\nconst input = msg.payload;       // число из inject (7)\nconst names = [\"Аня\", \"Борис\", \"Вика\", \"Глеб\", \"Даша\"];\n\n// === Проверка типа ===\nlet status;\nif (typeof input !== \"number\") {\n    status = \"Ошибка: payload не число\";\n} else if (input < 0) {\n    status = \"Отрицательное\";\n} else {\n    status = \"Положительное\";\n}\n\n// === Цикл for — сумма чисел от 1 до input ===\nlet sum = 0;\nfor (let i = 1; i <= input; i++) {\n    sum += i;\n}\n\n// === Цикл for...of — перебор массива ===\nconst upperNames = [];\nfor (const name of names) {\n    upperNames.push(name.toUpperCase());\n}\n\n// === Возвращаем объект с полем payload ===\nmsg.payload = {\n    input: input,\n    status: status,\n    sum: sum,\n    names: upperNames,\n    count: upperNames.length\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "f7f65586cc740099"
+            ]
+        ]
+    },
+    {
+        "id": "f7f65586cc740099",
+        "type": "debug",
+        "z": "06bffebe6a51ef33",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 220,
+        "wires": []
+    }
+]
