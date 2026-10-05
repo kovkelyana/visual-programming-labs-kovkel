@@ -1,0 +1,142 @@
+[
+    {
+        "id": "158c81c70f6e5d7c",
+        "type": "tab",
+        "label": "Flow 12",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1f98b33ec2b08a11",
+        "type": "inject",
+        "z": "158c81c70f6e5d7c",
+        "name": "Counter +1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "inc",
+        "payloadType": "str",
+        "x": 100,
+        "y": 320,
+        "wires": [
+            [
+                "8aeb0f5b03ed0d21"
+            ]
+        ]
+    },
+    {
+        "id": "8aeb0f5b03ed0d21",
+        "type": "function",
+        "z": "158c81c70f6e5d7c",
+        "name": "function 8",
+        "func": "// Получаем текущее значение счётчика из flow context\n// Если его ещё нет — начинаем с 0\nlet counter = flow.get(\"counter\") || 0;\n\n// Увеличиваем счётчик\ncounter = counter + 1;\n\n// Сохраняем обратно в flow context\nflow.set(\"counter\", counter);\n\n// Возвращаем значение в debug\nmsg.payload = {\n    counter: counter,\n    action: \"increment\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "583d248005e7822c"
+            ]
+        ]
+    },
+    {
+        "id": "583d248005e7822c",
+        "type": "debug",
+        "z": "158c81c70f6e5d7c",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "1ffa739637502b68",
+        "type": "inject",
+        "z": "158c81c70f6e5d7c",
+        "name": "Counter reset",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "reset",
+        "payloadType": "str",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "afc7ad98752a2577"
+            ]
+        ]
+    },
+    {
+        "id": "afc7ad98752a2577",
+        "type": "function",
+        "z": "158c81c70f6e5d7c",
+        "name": "function 9",
+        "func": "// Сбрасываем счётчик в 0 и сохраняем в flow context\nflow.set(\"counter\", 0);\n\nmsg.payload = {\n    counter: 0,\n    action: \"reset\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "5ad38761ec26e86d"
+            ]
+        ]
+    },
+    {
+        "id": "5ad38761ec26e86d",
+        "type": "debug",
+        "z": "158c81c70f6e5d7c",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 400,
+        "wires": []
+    }
+]
