@@ -1,0 +1,155 @@
+[
+    {
+        "id": "e541113b6565977d",
+        "type": "tab",
+        "label": "Flow 8",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "35b9245ba21c9497",
+        "type": "http in",
+        "z": "e541113b6565977d",
+        "name": "GET /api/text",
+        "url": "/api/text",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "d77aa4735e86e3f2"
+            ]
+        ]
+    },
+    {
+        "id": "79b8db0d8df9df24",
+        "type": "http response",
+        "z": "e541113b6565977d",
+        "name": "Response text",
+        "statusCode": "",
+        "headers": {},
+        "x": 540,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d77aa4735e86e3f2",
+        "type": "template",
+        "z": "e541113b6565977d",
+        "name": "Text response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Привет! Это простой текстовый ответ.",
+        "output": "str",
+        "x": 360,
+        "y": 380,
+        "wires": [
+            [
+                "79b8db0d8df9df24"
+            ]
+        ]
+    },
+    {
+        "id": "ab56d9dbe40a5330",
+        "type": "http in",
+        "z": "e541113b6565977d",
+        "name": "GET /api/info",
+        "url": "/api/info",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 460,
+        "wires": [
+            [
+                "ed97d304e3b4a1c9"
+            ]
+        ]
+    },
+    {
+        "id": "faa8f4a97b310838",
+        "type": "http response",
+        "z": "e541113b6565977d",
+        "name": "Response JSON",
+        "statusCode": "",
+        "headers": {},
+        "x": 610,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ed97d304e3b4a1c9",
+        "type": "template",
+        "z": "e541113b6565977d",
+        "name": "JSON response",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"name\": \"Ковкель\",\n    \"role\": \"student\",\n    \"lab\": \"lab2\"\n}",
+        "output": "json",
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "faa8f4a97b310838"
+            ]
+        ]
+    },
+    {
+        "id": "209184392d6b4def",
+        "type": "http in",
+        "z": "e541113b6565977d",
+        "name": "GET /api/items",
+        "url": "/api/items",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 540,
+        "wires": [
+            [
+                "aa8cb67137300235"
+            ]
+        ]
+    },
+    {
+        "id": "a6589fce69d9c31b",
+        "type": "http response",
+        "z": "e541113b6565977d",
+        "name": "Response items",
+        "statusCode": "",
+        "headers": {},
+        "x": 640,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "aa8cb67137300235",
+        "type": "function",
+        "z": "e541113b6565977d",
+        "name": "function 4",
+        "func": "// === Получаем query-параметр id ===\nconst idRaw = msg.req.query.id;\n\n// === Проверка 1: параметр обязателен ===\nif (!idRaw) {\n    msg.statusCode = 400;\n    msg.payload = {\n        status: \"error\",\n        code: 400,\n        message: \"Параметр 'id' обязателен. Пример: /api/items?id=3\"\n    };\n    return msg;\n}\n\n// === Проверка 2: id должен быть числом ===\nconst id = Number(idRaw);\nif (isNaN(id)) {\n    msg.statusCode = 400;\n    msg.payload = {\n        status: \"error\",\n        code: 400,\n        message: \"Параметр 'id' должен быть числом\"\n    };\n    return msg;\n}\n\n// === Проверка 3: id в допустимом диапазоне (1..5) ===\nif (id < 1 || id > 5) {\n    msg.statusCode = 404;\n    msg.payload = {\n        status: \"error\",\n        code: 404,\n        message: `Товар с id=${id} не найден. Доступны id от 1 до 5`\n    };\n    return msg;\n}\n\n// === Успех: возвращаем \"товар\" ===\nmsg.statusCode = 200;\nmsg.payload = {\n    status: \"ok\",\n    item: {\n        id: id,\n        name: `Товар №${id}`,\n        price: id * 100\n    }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "a6589fce69d9c31b"
+            ]
+        ]
+    }
+]

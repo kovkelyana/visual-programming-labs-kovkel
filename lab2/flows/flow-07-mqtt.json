@@ -1,0 +1,145 @@
+[
+    {
+        "id": "42c29c81abea2b29",
+        "type": "tab",
+        "label": "Flow 7",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d894ce93f75e1ff3",
+        "type": "inject",
+        "z": "42c29c81abea2b29",
+        "name": "Publish random 5 sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "2a1c2bd12bf29eac"
+            ]
+        ]
+    },
+    {
+        "id": "d3615417e675eef0",
+        "type": "mqtt out",
+        "z": "42c29c81abea2b29",
+        "name": "Publish sensor",
+        "topic": "student/Ковкель/lab2/sensor",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5f05eb72dccaa7f7",
+        "x": 560,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8575270588c9acfd",
+        "type": "mqtt in",
+        "z": "42c29c81abea2b29",
+        "name": "Subscribe sensor",
+        "topic": "student/Ковкель/lab2/sensor",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "5f05eb72dccaa7f7",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 420,
+        "wires": [
+            [
+                "5ba440017206df57"
+            ]
+        ]
+    },
+    {
+        "id": "5ba440017206df57",
+        "type": "debug",
+        "z": "42c29c81abea2b29",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2a1c2bd12bf29eac",
+        "type": "function",
+        "z": "42c29c81abea2b29",
+        "name": "function 3",
+        "func": "// Генерируем случайное число от 10 до 35\nconst min = 10;\nconst max = 35;\nconst randomValue = Math.round(min + Math.random() * (max - min));\n\nmsg.payload = randomValue;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "d3615417e675eef0"
+            ]
+        ]
+    },
+    {
+        "id": "5f05eb72dccaa7f7",
+        "type": "mqtt-broker",
+        "name": "HiveMQ public broker",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
