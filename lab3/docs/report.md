@@ -70,41 +70,41 @@ https://my-app-261009-49536.bubbleapps.io/version-test/?debug_mode=true
 - **Delete** — `Delete ask` + `Delete confirm` (удаление с подтверждением)
 
 ### UI
-- **Global variable** `brand-accent` (цвет) — применена к кнопке
+- **Global variable**(цвет) — применена к кнопке
 - **Style** — новый стиль кнопки с использованием переменной
 - **Component** из Drag & drop UI Components — добавлен на страницу
 - **Header + Body + Footer** — структура страниц
 
 ### Ачивка (Plugins)
-- **Slideshow A** — плагин слайд-шоу (не из лекции)
+- **Slideshow A** — плагин слайд-шоу
 
 ## 6. Скриншоты всех шагов
 
 ### Часть 1. Промпт и генерация
-![01-prompt](screenshots/01-prompt.png)
+![01-prompt](/lab3/screenshots/01-prompt.png)
 
 ### Часть 2. Build Guides
-![02-buildguide-1](screenshots/02-buildguide-1.png)
-![02-buildguide-2](screenshots/02-buildguide-2.png)
-![02-buildguide-3](screenshots/02-buildguide-3.png)
-![02-buildguide-before](screenshots/02-buildguide-beforeaddlistsai.png)
-![02-buildguide-after](screenshots/02-buildguide-afteraddlists.png)
+![02-buildguide-1](/lab3/screenshots/02-buildguide-1.png)
+![02-buildguide-2](/lab3/screenshots/02-buildguide-2.png)
+![02-buildguide-3](/lab3/screenshots/02-buildguide-3.png)
+![02-buildguide-before](/lab3/screenshots/02-buildguide-beforeaddlistsai.png)
+![02-buildguide-after](/lab3/screenshots/02-buildguide-afteraddlists.png)
 
 ### Часть 3. UI
-![03-global-variable](screenshots/03-global-variable.png)
-![04-style](screenshots/04-style.png)
-![04-styleshow](screenshots/04-styleshow.png)
-![05-component](screenshots/05-component.png)
+![03-global-variable](/lab3/screenshots/03-global-variable.png)
+![04-style](/lab3/screenshots/04-style.png)
+![04-styleshow](/lab3/screenshots/04-styleshow.png)
+![05-component](/lab3/screenshots/05-component.png)
 
 ### Часть 4. Data + CRUD
-![06-data-type](screenshots/06-data-type.png)
-![07-data-records](screenshots/07-data-records.png)
-![08-workflow-create](screenshots/08-workflow-create.png)
-![09-workflow-update](screenshots/09-workflow-update.png)
-![10-workflow-delete](screenshots/10-workflow-delete.png)
+![06-data-type](/lab3/screenshots/06-data-type.png)
+![07-data-records](/lab3/screenshots/07-data-records.png)
+![08-workflow-create](/lab3/screenshots/08-workflow-create.png)
+![09-workflow-update](/lab3/screenshots/09-workflow-update.png)
+![10-workflow-delete](/lab3/screenshots/10-workflow-delete.png)
 
 ### Часть 5. Ачивка
-![12-plugin-1](screenshots/12-plugin-1.png)
+![12-plugin-1](/lab3/screenshots/12-plugin-1.png)
 
 ## 7. Выводы
 
