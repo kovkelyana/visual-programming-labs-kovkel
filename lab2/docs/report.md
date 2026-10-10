@@ -68,7 +68,7 @@ Linux 6.18.40.1-microsoft-standard-WSL2 x64 LE
 
 ### Скриншот версий Node-RED и Node.js из логов Docker
 
-![Версии](screenshots/00-versions.png)
+![Версии](/lab2/screenshots/00-versions.png)
 
 *На скриншоте — логи контейнера после запуска. Видны версии Node-RED (v5.0.7) и Node.js (v24.20.0), а также путь к файлу потоков `/data/flows.json`.*
 
