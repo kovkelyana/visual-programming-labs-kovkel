@@ -82,7 +82,7 @@ Linux 6.18.40.1-microsoft-standard-WSL2 x64 LE
 
 ### 5.2. Function
 
-![Function](screenshots/02-function.png)
+![Function](lab2/screenshots/02-function.png)
 
 *Поток inject → function → debug. Inject отправляет число `7`. Function-нода использует базовые элементы JS (`let`/`const`, `if/else`, цикл `for`, массив, объект): считает сумму чисел от 1 до 7 (`28`), проверяет тип значения, переводит массив имён в верхний регистр. Возвращает объект `{input, status, sum, names, count}`.*
 
