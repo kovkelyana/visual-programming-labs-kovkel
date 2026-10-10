@@ -76,129 +76,129 @@ Linux 6.18.40.1-microsoft-standard-WSL2 x64 LE
 
 ### 5.1. Inject → Debug
 
-![Inject Debug](screenshots/01-inject-debug.png)
+![Inject Debug](/lab2/screenshots/01-inject-debug.png)
 
-*Поток inject → debug. Inject срабатывает каждые 5 секунд и отправляет строку `Ковкель` с темой `lab2/Ковкель/basic`. Debug настроен на **complete msg object** — показывает все поля: `payload`, `topic`, `_msgid`. Видно, что сообщения приходят с интервалом 5 секунд.*
+*Поток inject → debug. Inject срабатывает каждые 5 секунд и отправляет строку `Ковкель` с темой `lab2/Ковкель/basic`. Debug настроен на complete msg object — показывает все поля: `payload`, `topic`, `_msgid`.*
 
 ### 5.2. Function
 
-![Function](lab2/screenshots/02-function.png)
+![Function](/lab2/screenshots/02-function.png)
 
-*Поток inject → function → debug. Inject отправляет число `7`. Function-нода использует базовые элементы JS (`let`/`const`, `if/else`, цикл `for`, массив, объект): считает сумму чисел от 1 до 7 (`28`), проверяет тип значения, переводит массив имён в верхний регистр. Возвращает объект `{input, status, sum, names, count}`.*
+*Поток inject → function → debug. Inject отправляет число `7`. Function-нода использует базовые элементы JS: считает сумму чисел от 1 до 7 (`28`), проверяет тип, переводит массив имён в верхний регистр. Возвращает объект `{input, status, sum, names, count}`.*
 
 ### 5.3. Switch
 
-![Switch](screenshots/03-switch.png)
+![Switch](/lab2/screenshots/03-switch.png)
 
-*Поток inject → function → switch → два debug. Switch проверяет `msg.payload.sum`: если `>= 15` — сообщение идёт в верхний debug (`debug 3`), иначе — в нижний (`debug 4`). Так как сумма = 28, сработал верхний выход.*
+*Поток inject → function → switch → два debug. Switch проверяет `msg.payload.sum`: если `>= 15` — идёт в верхний debug, иначе — в нижний. При сумме 28 сработал верхний выход.*
 
 ### 5.4. Change
 
-![Change](screenshots/04-change.png)
+![Change](/lab2/screenshots/04-change.png)
 
-*Поток inject → change → debug. Change-нода устанавливает три поля за один проход: `msg.payload = "изменённый payload"`, `msg.topic = "lab2/Ковкель/change"`, `msg.timestamp = текущее время`. Debug показывает весь объект — видно, что все три поля изменились.*
+*Поток inject → change → debug. Change-нода устанавливает три поля за один проход: `msg.payload`, `msg.topic`, `msg.timestamp`.*
 
 ### 5.5. Template
 
-![Template](screenshots/05-template.png)
+![Template](/lab2/screenshots/05-template.png)
 
-*Поток inject → template → debug. Inject отправляет JSON-объект `{name, group, age}`. Template по Mustache-шаблону подставляет значения в `{{payload.name}}`, `{{payload.group}}`, `{{payload.age}}` и формирует JSON. На выходе — объект со студенческой информацией.*
+*Поток inject → template → debug. Template по Mustache-шаблону подставляет `{{payload.name}}`, `{{payload.group}}`, `{{payload.age}}` и формирует JSON.*
 
 ### 5.6. HTTP Request
 
-![HTTP Request](screenshots/06-http-request.png)
+![HTTP Request](/lab2/screenshots/06-http-request.png)
 
-*Поток inject → http request → debug. HTTP Request делает GET-запрос к публичному API `https://catfact.ninja/fact` (без токенов). Return настроен на **parsed JSON object**. Debug показывает объект `{fact, length}` — случайный факт о котах.*
+*Поток inject → http request → debug. GET-запрос к `https://catfact.ninja/fact`. Return = parsed JSON object. Debug показывает `{fact, length}`.*
 
 ### 5.7. MQTT
 
-![MQTT](screenshots/07-mqtt.png)
+![MQTT](/lab2/screenshots/07-mqtt.png)
 
-*Поток с двумя ветками: inject → function → mqtt out (публикация), mqtt in → debug (подписка). Топик `student/Ковкель/lab2/sensor`. Inject раз в 5 секунд публикует случайное число 10–35 через MQTT-брокер `broker.hivemq.com:1883` (QoS 0). mqtt in подписан на тот же топик, поэтому число возвращается обратно — видно в Debug.*
+*Две ветки: публикация и подписка на топик `student/Ковкель/lab2/sensor`. Брокер `broker.hivemq.com:1883`, QoS 0. Число публикуется и возвращается обратно через подписку.*
 
 ### 5.8. GET-эндпоинты
 
 **Первый эндпоинт — `GET /api/text`:**
 
-![Endpoint text](screenshots/08a-endpoint-text.png)
+![Endpoint text](/lab2/screenshots/08a-endpoint-text.png)
 
-*Простой текстовый эндпоинт. http in принимает запрос, template формирует текст, http response отправляет. В браузере виден ответ: `Привет! Это простой текстовый ответ.`*
+*Простой текстовый эндпоинт. Возвращает `Привет! Это простой текстовый ответ.`*
 
 **Второй эндпоинт — `GET /api/info`:**
 
-![Endpoint info](screenshots/08b-endpoint-info.png)
+![Endpoint info](/lab2/screenshots/08b-endpoint-info.png)
 
-*JSON-эндпоинт. Возвращает объект `{name: "Ковкель", role: "student", lab: "lab2"}`. Template настроен на вывод JSON.*
+*JSON-эндпоинт. Возвращает `{name: "Ковкель", role: "student", lab: "lab2"}`.*
 
 **Третий эндпоинт — `GET /api/items?id=N` — три сценария:**
 
-![Endpoint items OK](screenshots/08c-endpoint-items-ok.png)
+![Endpoint items OK](/lab2/screenshots/08c-endpoint-items-ok.png)
 
-*Успешный запрос: `?id=3` → **200** с объектом товара `{id: 3, name: "Товар №3", price: 300}`.*
+*Успешный запрос: `?id=3` → 200 с объектом товара.*
 
-![Endpoint items 400](screenshots/08d-endpoint-items-400.png)
+![Endpoint items 400](/lab2/screenshots/08d-endpoint-items-400.png)
 
-*Ошибка 400 — параметр отсутствует. Function проверяет `msg.req.query.id` — если пусто, возвращает статус 400 и сообщение «Параметр 'id' обязателен».*
+*Ошибка 400 — параметр отсутствует.*
 
-![Endpoint items 404](screenshots/08e-endpoint-items-404.png)
+![Endpoint items 404](/lab2/screenshots/08e-endpoint-items-404.png)
 
-*Ошибка 404 — товар не найден. Function проверяет диапазон `1..5`. Значение `99` вне диапазона → статус 404 с сообщением «Товар с id=99 не найден».*
+*Ошибка 404 — товар не найден.*
 
 ### 5.9. Dashboard
 
-![Dashboard](screenshots/09-dashboard.png)
+![Dashboard](/lab2/screenshots/09-dashboard.png)
 
-*Dashboard с двумя виджетами: gauge (текущее значение) и chart (история). Inject раз в 5 секунд имитирует датчик температуры 15–35 °C. Виджеты объединены во вкладку «Лабораторная 2» и группу «Датчики». Доступ: `http://localhost:1880/ui`.*
+*Dashboard с gauge и chart. Имитация датчика температуры 15–35 °C. Доступ: `http://localhost:1880/ui`.*
 
 ### 5.10. Telegram-бот
 
 **Команда `/start`:**
 
-![Telegram start](screenshots/10a-telegram-start.png)
+![Telegram start](/lab2/screenshots/10a-telegram-start.png)
 
-*Бот отвечает на команду `/start` приветствием. Используются ноды: telegram command (ловит команду), template (формирует текст), telegram sender (отправляет). Текст приветствия содержит описание доступных команд.*
+*Бот отвечает на `/start` приветствием. Ноды: telegram command → template → telegram sender.*
 
 **Echo-ответ:**
 
-![Telegram echo](screenshots/10b-telegram-echo.png)
+![Telegram echo](/lab2/screenshots/10b-telegram-echo.png)
 
-*Echo-ветка: telegram receiver ловит любое сообщение → function формирует ответ «Эхо: <текст>» → telegram sender отправляет обратно. Пользователь пишет `a` — бот отвечает `Эхо: a`.*
+*Echo-ветка: receiver → function → sender. Пользователь пишет `a` — бот отвечает `Эхо: a`.*
 
 ### 5.11. Файлы (с доказательством сохранения между перезапусками)
 
 **До перезапуска:**
 
-![Files before](screenshots/11a-before-restart.png)
+![Files before](/lab2/screenshots/11a-before-restart.png)
 
-*Поток записи и чтения файла. Две ветки: inject → function → write file (запись в `/data/lab2-test.txt`) и inject → read file → debug (чтение). Строка `[2026-10-05T16:02:57.240Z] мяу` была записана в файл.*
+*Запись и чтение файла `/data/lab2-test.txt`. Строка записана.*
 
 **Перезапуск контейнера:**
 
-![Restart](screenshots/11b-restart.png)
+![Restart](/lab2/screenshots/11b-restart.png)
 
-*Терминал Git Bash: команда `docker restart mynodered` перезапускает контейнер. `docker ps` показывает статус `Up` — контейнер работает.*
+*Терминал: `docker restart mynodered` + `docker ps`.*
 
 **После перезапуска:**
 
-![Files after](screenshots/11c-after-restart.png)
+![Files after](/lab2/screenshots/11c-after-restart.png)
 
-*После перезапуска снова кликаем «Read file» — в Debug появляется **та же самая** строка `[2026-10-05T16:02:57.240Z] мяу`. Значит, файл сохранился между перезапусками, потому что лежит в **volume** (`~/node-red-data:/data`).*
+*Та же строка в Debug — файл сохранился в volume.*
 
 ### 5.12. Контекст (счётчик)
 
-![Context 1](screenshots/12a-context.png)
+![Context 1](/lab2/screenshots/12a-context.png)
 
-*Поток со счётчиком на **flow context**. Верхняя ветка: inject → function (increment) → debug. Function читает `flow.get("counter")`, увеличивает на 1, сохраняет `flow.set("counter", counter)`. Debug показывает `counter: 1, 2, 3` — значение сохраняется между сообщениями.*
+*Flow context: inject → function (increment) → debug. `counter: 1, 2, 3` — значение сохраняется между сообщениями.*
 
-![Context 2](screenshots/12b-context.png)
+![Context 2](/lab2/screenshots/12b-context.png)
 
-*Нижняя ветка: inject (reset) → function → debug. Function делает `flow.set("counter", 0)` — счётчик сбрасывается. После reset следующее нажатие `+1` даёт `counter: 1` — счётчик пошёл заново.*
+*Reset: `flow.set("counter", 0)`. После reset счётчик снова начинает с 1.*
 
 ### 5.13. Ачивка 11 — Telegram inline keyboard
 
-![Achievement 11](screenshots/13-achievement-inline-keyboard.png)
+![Achievement 11](/lab2/screenshots/13-achievement-inline-keyboard.png)
 
-*Ачивка: Telegram-бот с inline-клавиатурой. Команда `/music` показывает меню с 4 кнопками (Рок, Поп, Классика, Электроника). Нажатие кнопки ловится через ноду `telegram event` (Callback Query), роутер определяет, какая кнопка нажата, и отвечает «Твой выбор: <жанр>» + кнопка «Вернуться в меню». Возврат в меню показывает 4 кнопки заново.*
+*Ачивка: бот с inline-клавиатурой. Команда `/music` → меню с 4 кнопками (Рок, Поп, Классика, Электроника). Нажатие ловится `telegram event` (Callback Query). Роутер отвечает «Твой выбор: X» + кнопка «Вернуться в меню».*
 
 ## 6. Выводы
 
