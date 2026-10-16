@@ -1,0 +1,96 @@
+{
+  "name": "flow-09-redis",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1198205a-b802-48f7-a586-e68f898e7d09",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "kovkel",
+        "value": "hello from n8n lab4"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d9405330-d7a7-4270-b15b-910f7e729f4c",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "kovkel",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "c3f7fdf8-3124-4ed5-8522-934bc386d1b7",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4812d358-f15c-4c0a-a03c-bed13edee717",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "b7Lrs2LOAdakklm1",
+  "tags": []
+}

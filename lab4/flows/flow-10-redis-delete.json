@@ -1,0 +1,96 @@
+{
+  "name": "flow-10-redis-delete",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e3322348-d5f4-4280-b22c-1eef1e89ed4d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "kovkel"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "dd98f4d3-4c66-4797-a709-bdff1df9680d",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "value",
+        "key": "kovkel",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "5940f8c0-df13-4f7b-b2e6-6159498c52b9",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9ea6bb4f-afba-4b4a-a99c-6e68cc1e3429",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "CMKtKKQRMw9TkgOQ",
+  "tags": []
+}
