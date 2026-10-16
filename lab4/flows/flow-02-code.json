@@ -1,0 +1,77 @@
+{
+  "name": "flow-02-code",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "26b11cae-6bf4-402c-97e9-c93d1f468046",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === Базовые элементы JS ===\nconst surname = 'kovkel';         // const\nlet counter = 0;                  // let\n\n// Массив\nconst subjects = ['n8n', 'docker', 'redis', 'low-code'];\n\n// Объект\nconst info = {\n  student: surname,\n  lab: 4,\n  group: 'УИР-241'\n};\n\n// Цикл for с if/else\nfor (let i = 0; i < subjects.length; i++) {\n  if (subjects[i].length > 4) {\n    counter++; // длинные слова\n  } else {\n    counter += 0; // короткие — ничего не делаем\n  }\n}\n\n// Формируем итоговый payload\nconst payload = `Student ${info.student}, lab ${info.lab}. ` +\n                `Subjects: ${subjects.join(', ')}. ` +\n                `Long words count: ${counter}.`;\n\nreturn [{ json: { payload } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f40dda84-9489-4787-bb9c-a836a235a79b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "2826d56f-5c2f-4cf4-8a67-239f0881a7fa",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cede6df3-3f77-4ea7-94ff-eb1797045cff",
+  "meta": {
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "rEXGHM8kPZQnSV91",
+  "tags": []
+}

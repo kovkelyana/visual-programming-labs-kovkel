@@ -1,0 +1,101 @@
+{
+  "name": "flow-04-set",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cdb1ffb6-f8b9-440b-8fdb-5925ea2ab51d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "749afb59-c263-4f57-ac51-d2a7da942746",
+              "name": "topic",
+              "value": "lab4/kovkel/set",
+              "type": "string"
+            },
+            {
+              "id": "680cd824-72f4-42de-b839-947360afe306",
+              "name": "=timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "2576d742-4cce-4ca9-a51a-a7c0dbc571d6",
+              "name": "payload",
+              "value": "manual-set-kovkel",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "c0066462-3b96-4fd5-9f5a-c8fa45d09ed2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем данные из Set\nconst item = $input.first().json;\n\n// Собираем \"complete msg object\"\nconst msg = {\n  source: 'flow-04-set',\n  student: 'kovkel',\n  topic: item.topic,\n  timestamp: item.timestamp,\n  payload: item.payload,\n  receivedAt: new Date().toISOString(),\n  length: item.payload.length\n};\n\n// Выводим в консоль n8n\nconsole.log('Complete message object:', JSON.stringify(msg, null, 2));\n\nreturn [{ json: msg }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "d85fadc1-537f-492e-b113-b743e9f9e384",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3465285c-8921-4a22-b3c7-3d69b86860ac",
+  "meta": {
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "tH0HzsmMqtN3DgOg",
+  "tags": []
+}

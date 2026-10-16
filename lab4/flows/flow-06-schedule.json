@@ -1,0 +1,63 @@
+{
+  "name": "flow-06-schedule",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8feed107-4936-476f-bf79-fb7b3006ab86",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Возвращаем текущее время\nconst now = new Date();\n\nconst result = {\n  source: 'flow-06-schedule',\n  student: 'kovkel',\n  triggeredAt: now.toISOString(),\n  localTime: now.toLocaleString('ru-RU'),\n  unixTimestamp: Math.floor(now.getTime() / 1000)\n};\n\nconsole.log('Scheduled run at:', result.localTime);\n\nreturn [{ json: result }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "9e3144bd-4d4a-43d7-9363-35e4321a33bb",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "08e4eefc-7a74-4268-a8f8-98df2fd13187",
+  "meta": {
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "9NAhOoCr1poVaSgZ",
+  "tags": []
+}
