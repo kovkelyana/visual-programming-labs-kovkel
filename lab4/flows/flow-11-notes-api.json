@@ -1,0 +1,245 @@
+{
+  "name": "flow-11-notes-api",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notes",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b5f059bd-1021-44b4-aea0-b85fe2cb785f",
+      "name": "Webhook",
+      "webhookId": "fdd8a59c-d849-4658-838d-b39faa38389b"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=note:{{ $json.body.id }}",
+        "value": "={{ JSON.stringify($json.body) }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "07d3488e-0837-4458-b723-4e2125d009a1",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { status: 'created', id: $('Webhook').item.json.body.id } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "d8a44622-cb93-4246-b4b5-01dfa5a750b4",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "path": "notes",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "266e5cec-c52b-417a-a29d-0408b3afded3",
+      "name": "Webhook1",
+      "webhookId": "5aac4af0-ac68-4d27-b0eb-b742dfce47b7"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "value",
+        "key": "=note:{{ $json.query.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        896,
+        0
+      ],
+      "id": "a4e0283a-a24b-4b9e-88d5-c15826f080e6",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { status: 'ok', note: $json.value } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "ec75d7bc-6739-4131-9118-6451b8a83d42",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "DELETE",
+        "path": "notes",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        224
+      ],
+      "id": "38d472d8-c06a-467c-976a-a6b77819ad43",
+      "name": "Webhook2",
+      "webhookId": "fb58803e-797f-45f1-8e8b-d260f4cd859f"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "=note:{{ $json.query.id }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        880,
+        224
+      ],
+      "id": "e6229bf2-f25e-4034-baa6-597ae4536a56",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "AQ55LITWLIh0j0lQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { status: 'deleted', id: $('Webhook2').item.json.query.id } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1104,
+        224
+      ],
+      "id": "16f76bde-cab0-4533-a10a-82544936ea79",
+      "name": "Respond to Webhook2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook2": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d1b41867-c878-4a4d-b4f1-e206340e6637",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf6ef96af78bdee9a4aed6c162ed70524e3884d07a422074b06e4a0deaa7253a"
+  },
+  "nodeGroups": [],
+  "id": "T6x5o3OA4PSeEVKB",
+  "tags": []
+}
