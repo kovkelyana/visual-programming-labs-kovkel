@@ -56,7 +56,6 @@ curl "http://localhost:5678/webhook/notes?id=note1"
 ```
 
 Поле `note` — это строка (потому что мы сохраняли через `JSON.stringify`).
-Чтобы распарсить в объект на клиенте, нужно `JSON.parse(note)`.
 
 ### 3. Удалить заметку
 
